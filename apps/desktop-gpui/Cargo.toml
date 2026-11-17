@@ -201,6 +201,7 @@ tokio-tungstenite = { workspace = true }
 wiremock = { workspace = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]
+ashpd = { version = "=0.11.1", default-features = false, features = ["async-std"] }
 gtk = "=0.18.2"
 anlg-notification-linux = { path = "../../crates/notification-linux", package = "notification-linux" }
 
