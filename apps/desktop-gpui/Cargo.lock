@@ -3155,6 +3155,7 @@ dependencies = [
  "url",
  "uuid",
  "wiremock",
+ "x11rb",
  "zeroize",
 ]
 
@@ -3215,6 +3216,7 @@ dependencies = [
  "xcap",
  "zbus",
 ]
+
 [[package]]
 name = "deunicode"
 version = "1.6.2"
