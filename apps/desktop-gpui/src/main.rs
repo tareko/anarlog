@@ -51,6 +51,12 @@ fn main() -> anyhow::Result<()> {
         database: profile.join("library.sqlite"),
     })?;
     let zoom = desktop_gpui::zoom::Zoom::load(profile.join("zoom.json"));
+    // GPUI's own Linux path prompts run on the main thread. Cargo unifies their zbus
+    // backend with detect's Tokio feature, so keep a live reactor entered for the UI loop.
+    #[cfg(target_os = "linux")]
+    let _portal_context = desktop_gpui::platform::os::portal_runtime()
+        .map_err(|error| anyhow::anyhow!("Could not start native portal runtime: {error}"))?
+        .enter();
     let application = zoom.application().with_assets(Assets);
     let events = NativeEvents::install(&application);
     application.run(move |cx| {
