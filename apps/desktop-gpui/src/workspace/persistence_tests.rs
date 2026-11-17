@@ -422,6 +422,8 @@ fn provider_fixture(
                     Err(error) => panic!("{error}"),
                 }
             };
+            // Accepted sockets may inherit the listener's nonblocking mode (e.g. macOS).
+            stream.set_nonblocking(false).unwrap();
             stream
                 .set_read_timeout(Some(Duration::from_secs(5)))
                 .unwrap();
